@@ -94,4 +94,3 @@ const ProfileUpdate = () => {
 }
 
 export default ProfileUpdate
-
