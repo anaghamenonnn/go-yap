@@ -1,21 +1,23 @@
 
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signOut} from 'firebase/auth'
+import { collection, doc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore'
+import { toast } from "react-toastify";
+
+// --------- Paste Your Firebase Config File Here ---------
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAanRKtmqV0JryIm2f6EW8dSnUxvCsqGRg",
-  authDomain: "chat-app-4c740.firebaseapp.com",
-  projectId: "chat-app-4c740",
-  storageBucket: "chat-app-4c740.firebasestorage.app",
-  messagingSenderId: "485801169946",
-  appId: "1:485801169946:web:2419b187cfb9dc0cc2eda3"
-};
+    apiKey: "AIzaSyAanRKtmqV0JryIm2f6EW8dSnUxvCsqGRg",
+    authDomain: "chat-app-4c740.firebaseapp.com",
+    projectId: "chat-app-4c740",
+    storageBucket: "chat-app-4c740.firebasestorage.app",
+    messagingSenderId: "485801169946",
+    appId: "1:485801169946:web:2419b187cfb9dc0cc2eda3"
+  };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+const app = initializeApp(firebaseConfig)
+const auth = getAuth(app)
+const db = getFirestore(app)
 
 const signup = async (username, email, password) => {
     try {
